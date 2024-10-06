@@ -96,7 +96,87 @@ public class ValidParentheses {
         // Kiểm tra cuối cùng: nếu ngăn xếp vẫn còn dấu ngoặc mở, chuỗi không hợp lệ
         return stack.isEmpty();
     }
+
 */
+
+    //Cách 3:
+    /*
+    class Solution {
+        public boolean isValid(String s) {
+            Stack<Character> stack = new Stack<>();
+
+            // Step 1: Iterate through each character in the string
+            for (char ch : s.toCharArray()) {
+                // Step 2: Push open brackets onto the stack
+                if (ch == '(' || ch == '{' || ch == '[') {
+                    stack.push(ch);
+                }
+                // Step 3: For closing brackets, check for a match with the top of the stack
+                else if (ch == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                    stack.pop();  // Match found, pop the stack
+                } else if (ch == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                    stack.pop();  // Match found, pop the stack
+                } else if (ch == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                    stack.pop();  // Match found, pop the stack
+                }
+                // Step 4: If it's an unmatched closing bracket or stack is empty, return false
+                else {
+                    return false;
+                }
+            }
+
+            // Step 5: If the stack is empty, all brackets were matched correctly
+            return stack.isEmpty();
+        }
+    }*/
+
+
+    //cách 3
+
+/*
+
+    class Solution {
+
+        public boolean isValid(String s) {
+
+            int i = -1;
+
+            char[] stack = new char[s.length()];
+
+            for (char ch : s.toCharArray()) {
+
+                if (ch == '(' || ch == '{' || ch == '[')
+
+                    stack[++i] = ch;
+
+                else {
+
+                    if (i >= 0
+
+                            && ((stack[i] == '(' && ch == ')')
+
+                            || (stack[i] == '{' && ch == '}')
+
+                            || (stack[i] == '[' && ch == ']')))
+
+                        i--;
+
+                    else
+
+                        return false;
+
+                }
+
+            }
+
+            return i == -1;
+
+        }
+
+    }
+
+*/
+
     public static void main(String[] args) {
         System.out.println(isValid("()"));      // Kết quả: true
         System.out.println(isValid("()[]{}"));  // Kết quả: true
